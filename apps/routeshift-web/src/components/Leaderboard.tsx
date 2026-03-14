@@ -14,16 +14,16 @@ export function Leaderboard() {
   const entries = getLeaderboard(tokens, trips, rate);
 
   return (
-    <>
+    <div className="absolute top-4 right-4 z-10">
       <button
         onClick={() => setOpen(!open)}
-        className="absolute top-4 right-4 z-10 bg-black/80 backdrop-blur-md rounded-lg px-3 py-2 border border-white/10 text-xs text-white/70 hover:text-white transition-colors"
+        className="bg-black/80 backdrop-blur-md rounded-lg px-3 py-2 border border-white/10 text-xs text-white/70 hover:text-white transition-colors"
       >
         Leaderboard
       </button>
 
       {open && (
-        <div className="absolute top-14 right-4 z-10 w-72 bg-black/90 backdrop-blur-md rounded-lg border border-white/10 p-4">
+        <div className="mt-2 w-72 bg-black/90 backdrop-blur-md rounded-lg border border-white/10 p-4">
           <h3 className="text-sm font-semibold text-white mb-3">Leaderboard</h3>
 
           <div className="space-y-1">
@@ -63,6 +63,6 @@ export function Leaderboard() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

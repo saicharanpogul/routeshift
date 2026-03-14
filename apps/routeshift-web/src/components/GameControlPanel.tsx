@@ -22,8 +22,7 @@ export function GameControlPanel({
   onStart,
 }: GameControlPanelProps) {
   return (
-    <div className="absolute top-4 left-4 z-10 w-72">
-      <div className="bg-black/85 backdrop-blur-md rounded-lg p-4 border border-white/10">
+    <div className="bg-black/85 backdrop-blur-md rounded-lg p-4 border border-white/10">
         <div className="flex items-center justify-between mb-1">
           <h1 className="text-lg font-semibold text-white">RouteShift</h1>
           <div className="flex items-center gap-1.5">
@@ -68,7 +67,6 @@ export function GameControlPanel({
             </div>
           </div>
         )}
-      </div>
     </div>
   );
 }

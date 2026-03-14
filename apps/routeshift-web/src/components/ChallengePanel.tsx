@@ -15,7 +15,7 @@ export function ChallengePanel({ challenge }: ChallengePanelProps) {
   );
 
   return (
-    <div className="absolute top-14 left-4 z-10 w-64 bg-black/80 backdrop-blur-md rounded-lg p-3 border border-white/10">
+    <div className="bg-black/80 backdrop-blur-md rounded-lg p-3 border border-white/10">
       <div className="flex items-center justify-between mb-1">
         <span className="text-[10px] text-purple-400 uppercase font-medium tracking-wide">
           Challenge
