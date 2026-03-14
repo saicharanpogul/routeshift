@@ -1,3 +1,3 @@
-// RouteShift Simulation Engine
-// Phase 2: Agent-based traffic simulation
-// Scaffold only — implementation coming in Phase 2
+pub mod agent;
+pub mod simulation;
+pub mod types;

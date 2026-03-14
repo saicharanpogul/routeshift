@@ -9,6 +9,7 @@ crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 routeshift-core = { path = "../routeshift-core" }
+routeshift-sim = { path = "../routeshift-sim" }
 wasm-bindgen = "0.2"
 serde = { version = "1", features = ["derive"] }
 serde-wasm-bindgen = "0.6"
