@@ -1,65 +1,90 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
+import { MapView } from "@/components/MapView";
+import { CitySelector } from "@/components/CitySelector";
+import { ControlPanel } from "@/components/ControlPanel";
+import { StatsPanel } from "@/components/StatsPanel";
+import { useWasm } from "@/hooks/useWasm";
+import { useMapData } from "@/hooks/useMapData";
+import { useTrafficSim } from "@/hooks/useTrafficSim";
+import { CITIES } from "@/lib/cities";
+import { CityConfig } from "@/types/graph";
 
 export default function Home() {
+  const [city, setCity] = useState<CityConfig>(CITIES[0]);
+  const { wasm, loading: wasmLoading, error: wasmError } = useWasm();
+  const {
+    geojson,
+    graph,
+    loading: dataLoading,
+    error: dataError,
+  } = useMapData(city.name);
+  const {
+    result,
+    running,
+    error: simError,
+    config,
+    runAssignment,
+    setAssignmentType,
+  } = useTrafficSim(wasm, graph);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="relative w-screen h-screen">
+      <MapView city={city} geojson={geojson} result={result} />
+
+      {/* Top-left panel */}
+      <div className="absolute top-4 left-4 z-10 flex flex-col gap-3 w-72">
+        {/* Header */}
+        <div className="bg-black/80 backdrop-blur-md rounded-lg p-4 border border-white/10">
+          <h1 className="text-lg font-semibold text-white">RouteShift</h1>
+          <p className="text-xs text-white/50 mt-0.5">
+            Incentive-based traffic redistribution
           </p>
+          <div className="mt-3">
+            <CitySelector selected={city} onSelect={setCity} />
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Controls */}
+        <div className="bg-black/80 backdrop-blur-md rounded-lg p-4 border border-white/10">
+          <ControlPanel
+            assignmentType={config.assignment_type}
+            onAssignmentTypeChange={setAssignmentType}
+            onRun={runAssignment}
+            running={running}
+            wasmReady={!!wasm}
+            dataReady={!!graph}
+          />
         </div>
-      </main>
-    </div>
+
+        {/* Stats */}
+        <div className="bg-black/80 backdrop-blur-md rounded-lg p-4 border border-white/10">
+          <StatsPanel
+            result={result}
+            loading={dataLoading}
+            wasmLoading={wasmLoading}
+            wasmError={wasmError || simError}
+            dataError={dataError}
+          />
+        </div>
+      </div>
+
+      {/* Legend */}
+      {result && (
+        <div className="absolute bottom-6 left-4 z-10 bg-black/80 backdrop-blur-md rounded-lg p-3 border border-white/10">
+          <div className="text-[10px] text-white/50 uppercase tracking-wide mb-1.5">
+            Congestion (V/C Ratio)
+          </div>
+          <div className="flex items-center gap-1">
+            <div className="w-16 h-2 rounded-full bg-gradient-to-r from-green-500 via-yellow-500 to-red-700" />
+            <div className="flex justify-between w-16 text-[9px] text-white/40">
+              <span>0</span>
+              <span>1+</span>
+            </div>
+          </div>
+        </div>
+      )}
+    </main>
   );
 }

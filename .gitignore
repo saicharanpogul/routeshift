@@ -41,3 +41,4 @@ Thumbs.db
 
 # Misc
 *.log
+pnpm-lock.yaml
