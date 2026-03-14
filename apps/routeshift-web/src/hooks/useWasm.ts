@@ -2,14 +2,19 @@
 
 import { useState, useEffect, useRef } from "react";
 
-interface WasmModule {
+export interface WasmModule {
+  // Original API
   solve_traffic_assignment: (network: unknown, config: unknown) => unknown;
-  compute_shortest_path: (
-    network: unknown,
-    source: number,
-    target: number
-  ) => unknown;
+  compute_shortest_path: (network: unknown, source: number, target: number) => unknown;
   version: () => string;
+  // Simulation API
+  init_simulation: (network: unknown, config: unknown, geometries: unknown) => void;
+  sim_tick: (dt: number) => unknown;
+  spawn_player: (origin: number) => void;
+  compute_route_options: (origin: number, destination: number) => unknown;
+  set_player_route: (routeIndex: number) => void;
+  get_route_reward: (routeIndex: number) => number;
+  find_nearest_node: (lng: number, lat: number) => number;
 }
 
 export function useWasm() {
