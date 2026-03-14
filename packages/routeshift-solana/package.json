@@ -1,0 +1,9 @@
+{
+  "name": "routeshift-solana",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "echo 'scaffold only'",
+    "test": "echo 'no tests yet'"
+  }
+}

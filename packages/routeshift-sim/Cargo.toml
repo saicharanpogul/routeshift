@@ -1,0 +1,9 @@
+[package]
+name = "routeshift-sim"
+version = "0.1.0"
+edition = "2021"
+description = "Agent-based traffic simulation engine for RouteShift"
+
+[dependencies]
+routeshift-core = { path = "../routeshift-core" }
+serde = { version = "1", features = ["derive"] }

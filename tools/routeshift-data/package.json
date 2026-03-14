@@ -1,0 +1,9 @@
+{
+  "name": "routeshift-data",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "echo 'data tools - no build step'",
+    "extract": "python scripts/extract_network.py"
+  }
+}

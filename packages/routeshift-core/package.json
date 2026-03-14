@@ -1,0 +1,9 @@
+{
+  "name": "routeshift-core",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "cargo build -p routeshift-core --release",
+    "test": "cargo test -p routeshift-core"
+  }
+}

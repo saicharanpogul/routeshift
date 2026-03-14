@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Rust
+target/
+**/*.rs.bk
+
+# WASM
+packages/routeshift-wasm/pkg/
+
+# Next.js
+.next/
+out/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+tools/routeshift-data/output/
+
+# Environment
+.env
+.env.local
+.env*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Turbo
+.turbo/
+
+# Misc
+*.log

@@ -1,0 +1,11 @@
+{
+  "name": "routeshift-wasm",
+  "version": "0.1.0",
+  "main": "pkg/routeshift_wasm.js",
+  "types": "pkg/routeshift_wasm.d.ts",
+  "files": ["pkg"],
+  "scripts": {
+    "build": "wasm-pack build --target web --out-dir pkg",
+    "test": "wasm-pack test --headless --chrome"
+  }
+}

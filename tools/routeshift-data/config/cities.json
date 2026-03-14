@@ -1,0 +1,28 @@
+{
+  "cities": [
+    {
+      "name": "hyderabad",
+      "label": "Hyderabad",
+      "center": [17.385, 78.4867],
+      "radius_km": 10,
+      "query": "Hyderabad, Telangana, India",
+      "network_type": "drive"
+    },
+    {
+      "name": "mumbai",
+      "label": "Mumbai",
+      "center": [19.076, 72.8777],
+      "radius_km": 10,
+      "query": "Mumbai, Maharashtra, India",
+      "network_type": "drive"
+    },
+    {
+      "name": "bangalore",
+      "label": "Bangalore",
+      "center": [12.9716, 77.5946],
+      "radius_km": 10,
+      "query": "Bengaluru, Karnataka, India",
+      "network_type": "drive"
+    }
+  ]
+}

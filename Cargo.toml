@@ -1,0 +1,12 @@
+[workspace]
+resolver = "2"
+members = [
+    "packages/routeshift-core",
+    "packages/routeshift-wasm",
+    "packages/routeshift-sim",
+    "packages/routeshift-solana",
+]
+
+[profile.release]
+opt-level = "s"
+lto = true
